@@ -113,9 +113,9 @@ class TwitPicOAuthClient(oauth.OAuthClient):
         
         Args:
           consumer_key:
-            Twitter API Key
+            Twitter API Key [optional]
           consumer_secret:
-            Twitter API Secret
+            Twitter API Secret [optional]
           access_token:
             Authorized access_token in string format. [optional]
           service_key:
@@ -203,7 +203,10 @@ class TwitPicOAuthClient(oauth.OAuthClient):
         if not self.service_key:
             raise TwitPicError("Missing TwitPic service key")
 
-        # TODO: Add parameter validation here
+        # VERIFYME: dict.keys() vs iterkeys()
+        for req_param in required.iterkeys():
+            if req_param not in params:
+                raise TwitPicError('"' + req_param + '" parameter is not provided.')
 
         oauth_request = oauth.OAuthRequest.from_consumer_and_token(
             self.consumer,
@@ -216,7 +219,8 @@ class TwitPicOAuthClient(oauth.OAuthClient):
 
         # Set TwitPic parameters
         oauth_request.set_parameter('key', self.service_key)
-        for key,value in params.items():
+        # VERIFYME: dict.items() vs dict.iteritems()
+        for key, value in params.iteritems():
             oauth_request.set_parameter(key, value)
 
         # Build request body parameters.
@@ -272,8 +276,9 @@ class TwitPicOAuthClient(oauth.OAuthClient):
           will be required for this call as well.
         
         """
-        # TODO: Add exception handling when None is returned
         uri, required = self.GET_URIS.get(method, (None, None))
+        if uri is None:
+            raise TwitPicError('Unidentified Method: ' + method)
         
         if format:
             self.format = format
@@ -281,7 +286,10 @@ class TwitPicOAuthClient(oauth.OAuthClient):
         if method == 'faces_show':
             return self._post_call(method, params, uri, required)
         
-        # TODO: Add parameter validation here
+        # VERIFYME: dict.keys() vs dict.iterkeys()
+        for req_param in required.iterkeys():
+            if req_param not in params:
+                raise TwitPicError('"' + req_param + '" parameter is not provided.')
         
         # Build our GET url
         request_params = urllib.urlencode(params)
@@ -318,9 +326,12 @@ class TwitPicOAuthClient(oauth.OAuthClient):
           should have been provided before calling this method.
         
         """
-        # TODO: raise an exception if the user provides the key param.
-        # TODO: Add exception handling when None is returned
+        if 'key' in a:
+            raise TwitPicError('"key" parameter should be provided by set_service_key method or initializer method.')
+        
         uri, required = self.POST_URIS.get(method, (None, None))
+        if uri is None:
+            raise TwitPicError('Unidentified Method: ' + method)
         
         if format:
             self.format = format
@@ -340,9 +351,12 @@ class TwitPicOAuthClient(oauth.OAuthClient):
             response format. default is json. options are (xml, json)
         
         """
-        # TODO: raise an exception if the user provides the key param.
-        # TODO: Add exception handling when None is returned
+        if 'key' in a:
+            raise TwitPicError('"key" parameter should be provided by set_service_key method or initializer method.')
+        
         uri, required = self.PUT_URIS.get(method, (None, None))
+        if uri is None:
+            raise TwitPicError('Unidentified Method: ' + method)
         
         if format:
             self.format = format
@@ -362,9 +376,12 @@ class TwitPicOAuthClient(oauth.OAuthClient):
             response format. default is json. options are (xml, json)
         
         """
-        # TODO: raise an exception if the user provides the key param.
-        # TODO: Add exception handling when None is returned
+        if 'key' in a:
+            raise TwitPicError('"key" parameter should be provided by set_service_key method or initializer method.')
+        
         uri, required = self.DELETE_URIS.get(method, (None, None))
+        if uri is None:
+            raise TwitPicError('Unidentified Method: ' + method)
         
         if format:
             self.format = format
