@@ -111,6 +111,8 @@ class TwitPicOAuthClient(oauth.OAuthClient):
         """
         An object for interacting with the Twitpic API.
         
+        The arguments listed below are generally required for most calls.
+        
         Args:
           consumer_key:
             Twitter API Key [optional]
@@ -120,8 +122,6 @@ class TwitPicOAuthClient(oauth.OAuthClient):
             Authorized access_token in string format. [optional]
           service_key:
             Twitpic service key used to interact with the API. [optional]
-          format:
-            Response format (json, xml). Default is json. [optional]
         
         NOTE:
           The TwitPic OAuth Client does NOT support fetching 
@@ -202,27 +202,26 @@ class TwitPicOAuthClient(oauth.OAuthClient):
             raise TwitPicError("Missing access_token")
         if not self.service_key:
             raise TwitPicError("Missing TwitPic service key")
-
-        # VERIFYME: dict.keys() vs iterkeys()
-        for req_param in required.iterkeys():
+        
+        for req_param in required:
             if req_param not in params:
                 raise TwitPicError('"' + req_param + '" parameter is not provided.')
-
+        
         oauth_request = oauth.OAuthRequest.from_consumer_and_token(
             self.consumer,
             self.access_token,
             http_url=self.USER_INFO_URL
         )        
-
+        
         # Sign our request before setting Twitpic-only parameters
         oauth_request.sign_request(self.signature_method, self.consumer, self.access_token)
-
+        
         # Set TwitPic parameters
         oauth_request.set_parameter('key', self.service_key)
-        # VERIFYME: dict.items() vs dict.iteritems()
+        
         for key, value in params.iteritems():
             oauth_request.set_parameter(key, value)
-
+        
         # Build request body parameters.
         params = oauth_request.parameters
         content_type, content_body = self._encode_multipart_formdata(params)
@@ -286,8 +285,7 @@ class TwitPicOAuthClient(oauth.OAuthClient):
         if method == 'faces_show':
             return self._post_call(method, params, uri, required)
         
-        # VERIFYME: dict.keys() vs dict.iterkeys()
-        for req_param in required.iterkeys():
+        for req_param in required:
             if req_param not in params:
                 raise TwitPicError('"' + req_param + '" parameter is not provided.')
         
@@ -326,10 +324,11 @@ class TwitPicOAuthClient(oauth.OAuthClient):
           should have been provided before calling this method.
         
         """
-        if 'key' in a:
+        if 'key' in params:
             raise TwitPicError('"key" parameter should be provided by set_service_key method or initializer method.')
         
         uri, required = self.POST_URIS.get(method, (None, None))
+        
         if uri is None:
             raise TwitPicError('Unidentified Method: ' + method)
         
@@ -351,10 +350,11 @@ class TwitPicOAuthClient(oauth.OAuthClient):
             response format. default is json. options are (xml, json)
         
         """
-        if 'key' in a:
+        if 'key' in params:
             raise TwitPicError('"key" parameter should be provided by set_service_key method or initializer method.')
         
         uri, required = self.PUT_URIS.get(method, (None, None))
+        
         if uri is None:
             raise TwitPicError('Unidentified Method: ' + method)
         
@@ -376,10 +376,11 @@ class TwitPicOAuthClient(oauth.OAuthClient):
             response format. default is json. options are (xml, json)
         
         """
-        if 'key' in a:
+        if 'key' in params:
             raise TwitPicError('"key" parameter should be provided by set_service_key method or initializer method.')
         
         uri, required = self.DELETE_URIS.get(method, (None, None))
+        
         if uri is None:
             raise TwitPicError('Unidentified Method: ' + method)
         
