@@ -1,0 +1,63 @@
+Version 2.0 is finally here thanks to Saberre for solving the 401 issue!
+Currently, python-twitpic only supports photo uploads.
+
+=Version 2.0 Usage=
+
+NOTE: The TwitPicOAuthClient does NOT support fetching an access_token. Use your favorite Twitter API Client to retrieve this. An access_token is required in most API calls.
+
+{{{
+import twitpic2
+twitpic = twitpic2.TwitPicOAuthClient(
+    consumer_key = CONSUMER_KEY,
+    consumer_secret = CONSUMER_SECRET,
+    access_token = ACCESS_TOKEN,
+    service_key = SERVICE_KEY
+)
+# methods - read, create, update, remove    
+response = twitpic2.create(METHOD_CALL, PARAMS)
+print response
+}}}
+
+=Version 2.0 usage via commandline=
+$ twitpic2.py --help
+Usage: twitpic2.py -k CONSUMER_KEY -s CONSUMER_SECRET -a ACCESS_TOKEN -t SERVICE_KEY -m TWEET -f FILE
+
+Options:
+  -h, --help            show this help message and exit
+  -k CONSUMER_KEY, --consumer_key=CONSUMER_KEY
+                        Twitter consumer API key
+  -s CONSUMER_SECRET, --consumer_secret=CONSUMER_SECRET
+                        Twitter consumer API secret
+  -a ACCESS_TOKEN, --access_token=ACCESS_TOKEN
+                        Twitter Access Token
+  -t SERVICE_KEY, --service_key=SERVICE_KEY
+                        Twitpic API key
+  -m MESSAGE, --message=MESSAGE
+                        The tweet that belongs to the image.
+  -f FILE, --file=FILE  The file upload data.
+
+=Version 1.0 Usage=
+
+TwitPic has announced that they will continue support for version 1.0. We recommend using 2.0 because its more secure.
+
+{{{
+import twitpic
+twit = twitpic.TwitPicAPI('USERNAME', 'PASSWORD')
+twitpic_url = twit.upload('FILE_LOCATION')
+# Post to Twitter
+#twitpic_url = twit.upload('FILE_LOCATION', post_to_twitter=True)
+#twitpic_url = twit.upload('FILE_LOCATION', message='messages rock!', post_to_twitter=True)
+print twitpic_url
+}}}
+
+=Version 1.0 usage via commandline=
+$ twitpic.py --help
+
+Usage: twitpic -u USER_NAME options IMG_PATH
+
+Options:
+  -h, --help            show this help message and exit<br />
+  -u USER, --user=USER  Twitpic user name <br />
+  -p PASSWD, --passwd=PASSWD Twitpic password <br />
+  -b, --both            post to twitter together<br />
+  -m MSG, --msg=MSG     message
