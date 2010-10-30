@@ -247,7 +247,7 @@ class TwitPicOAuthClient(oauth.OAuthClient):
             # Get the response.
             response = urllib2.urlopen(req)
         except urllib2.HTTPError, e:
-            return e.code
+            raise TwitPicError(e)
 
         if self.format == 'json':
             return self.parse_json(response.read())
@@ -300,7 +300,7 @@ class TwitPicOAuthClient(oauth.OAuthClient):
             # Get the response.
             response = urllib2.urlopen(req)
         except urllib2.HTTPError, e:
-            return e.code
+            raise TwitPicError(e)
         
         if self.format == 'json':
             return self.parse_json(response.read())
@@ -397,8 +397,8 @@ class TwitPicOAuthClient(oauth.OAuthClient):
                 return node.firstChild.nodeValue
             else:
                 return dom
-        except ExpatError:
-            return 0
+        except ExpatError, e:
+            raise TwitPicError('XML Parsing Error: ' + e)
     
     def parse_json(self, json_response):
         try:
@@ -407,8 +407,8 @@ class TwitPicOAuthClient(oauth.OAuthClient):
                 return result['errors']['code']
             else:
                 return result
-        except ValueError:
-            return 0
+        except ValueError, e:
+            raise TwitPicError('JSON Parsing Error: ' + e)
 
 if __name__ == '__main__':
     from optparse import OptionParser
