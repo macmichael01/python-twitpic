@@ -20,11 +20,11 @@ needed for the given method call.
     twitpic = twitpic2.TwitPicOAuthClient(
         consumer_key = CONSUMER_KEY,
         consumer_secret = CONSUMER_SECRET,
-        access_token = ACCESS_TOKEN,
+        access_token = "oauth_token=%s&oauth_token_secret=%s"  % (USER_TOKEN, USER_TOKEN_SECRET),
         service_key = SERVICE_KEY
     )
     # methods - read, create, update, remove    
-    response = twitpic2.create(METHOD_CALL, PARAMS)
+    response = twitpic.create(METHOD_CALL, PARAMS)
     print response
 
 Version 2.0 usage via command-line

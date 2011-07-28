@@ -141,7 +141,7 @@ class TwitPicOAuthClient(oauth.OAuthClient):
     def set_comsumer(self, consumer_key, consumer_secret):
         self.consumer = oauth.OAuthConsumer(consumer_key, consumer_secret)
     
-    def set_access_token(self, accss_token):
+    def set_access_token(self, access_token):
         self.access_token = oauth.OAuthToken.from_string(access_token)
     
     def set_service_key(self, service_key):
