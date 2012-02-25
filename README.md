@@ -1,4 +1,4 @@
-**About:**
+**ABOUT:**
 
 *NOTE:* The TwitPicOAuthClient does NOT support fetching an access_token. Use your 
 favorite Twitter API Client to retrieve this. An access_token is required in most API calls.
@@ -41,7 +41,7 @@ GET, POST, PUT, and DELETE methods.
     from twitpic import twitpic2
 
 
-**COMMAND-LINE USAGE**
+**COMMAND-LINE USAGE:**
 
 *NOTE*: Bash auto complete script FTW! Command also requires python-2.7 to use.
 
@@ -63,6 +63,6 @@ GET, POST, PUT, and DELETE methods.
                             The tweet that belongs to the image.
 
 
-**CHANGELOG:**
+**CHANGE LOG:**
 
 - 2-24-2012: TwitPic Client API V1.0 is now officially deprecated.
