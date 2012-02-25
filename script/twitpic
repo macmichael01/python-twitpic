@@ -1,0 +1,28 @@
+#!/usr/bin/python
+import argparse
+
+from twitpic import TwitPicOAuthClient
+
+if __name__ == '__main__':
+    description = "Python-TwitPic commandline utility."
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument('consumer_key', help='Twitter Consumer API Key')
+    parser.add_argument('consumer_secret',help='Twitter Consumer API Kecret')
+    parser.add_argument('access_token', help='Twitter Access Token')
+    parser.add_argument('service_key', help='Twitpic API Key')
+    parser.add_argument('file', help='Path to Image File.')
+    parser.add_argument('-m', '--message', default="",
+        help='The tweet that belongs to the image.')
+
+    opts = parser.parse_args()
+
+    twitpic = TwitPicOAuthClient(
+        consumer_key = opts.consumer_key,
+        consumer_secret = opts.consumer_secret,
+        access_token = opts.access_token,
+        service_key = opts.service_key,
+    )
+
+    response = twitpic.create('upload', {'media': opts.file, 
+                                         'message': opts.message })
+    print response

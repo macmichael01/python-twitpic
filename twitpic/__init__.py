@@ -1,0 +1,1 @@
+from twitpic2 import *
