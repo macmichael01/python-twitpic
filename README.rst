@@ -14,33 +14,37 @@ GET, POST, PUT, and DELETE methods.
 INSTALLATION:
 ============
 
-    sudo pip install python-twitpic
+	sudo pip install python-twitpic
 
-OR
+- OR::
 
 	git clone https://github.com/macmichael01/python-twitpic;
 	cd python-twitpic;
-    sudo python setup.py install
+	sudo python setup.py install
 
 
 USAGE:
 =====
 
-    import twitpic
-    twitpic = twitpic.TwitPicOAuthClient(
-        consumer_key = CONSUMER_KEY,
-        consumer_secret = CONSUMER_SECRET,
-        access_token = "oauth_token=%s&oauth_token_secret=%s"  % (USER_TOKEN, USER_TOKEN_SECRET),
-        service_key = SERVICE_KEY
-    )
-    # methods - read, create, update, remove    
-    response = twitpic.create(METHOD_CALL, PARAMS)
-    print response
-
-You can import this library using:
 	import twitpic
-OR (oldschool)
+	twitpic = twitpic.TwitPicOAuthClient(
+		consumer_key = CONSUMER_KEY,
+		consumer_secret = CONSUMER_SECRET,
+		access_token = "oauth_token=%s&oauth_token_secret=%s"  % (USER_TOKEN, USER_TOKEN_SECRET),
+		service_key = SERVICE_KEY
+	)
+	# methods - read, create, update, remove    
+	response = twitpic.create(METHOD_CALL, PARAMS)
+	print response
+
+*NOTE*: importing python-twitpic can now be done as follows:
+
+	import twitpic
+	
+- OR::
+	
 	from twitpic import twitpic2
+
 
 COMMAND-LINE USAGE:
 ==================
@@ -63,7 +67,6 @@ optional arguments:
   -h, --help            show this help message and exit
   -m MESSAGE, --message MESSAGE
                         The tweet that belongs to the image.
-
 
 
 CHANGELOG:
