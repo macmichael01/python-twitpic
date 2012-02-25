@@ -11,8 +11,9 @@ There are 4 main methods that can be called. read, create, update, and remove wh
 GET, POST, PUT, and DELETE methods.
 
 
-INSTALLATION:
+INSTALLATION
 ============
+
 
 	sudo pip install python-twitpic
 
@@ -23,7 +24,7 @@ INSTALLATION:
 	sudo python setup.py install
 
 
-USAGE:
+USAGE
 =====
 
 	import twitpic
@@ -39,14 +40,15 @@ USAGE:
 
 *NOTE*: importing python-twitpic can now be done as follows:
 
+
 	import twitpic
 	
-- OR::
+OR::
 	
 	from twitpic import twitpic2
 
 
-COMMAND-LINE USAGE:
+COMMAND-LINE USAGE
 ==================
 
 *NOTE*: Bash auto complete script FTW! Command also requires python-2.7 to use.
@@ -69,6 +71,6 @@ optional arguments:
                         The tweet that belongs to the image.
 
 
-CHANGELOG:
-==========
+CHANGELOG
+=========
 2-24-2012: TwitPic Client API V1.0 is now officially deprecated.
