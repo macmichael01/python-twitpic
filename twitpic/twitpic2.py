@@ -67,8 +67,8 @@ class TwitPicOAuthClient(oauth.OAuthClient):
     """TwitPic OAuth Client API"""
     
     SIGNIN_URL        = 'https://api.twitter.com/oauth/authenticate'
-    STATUS_UPDATE_URL = 'https://api.twitter.com/1/statuses/update.json'
-    USER_INFO_URL     = 'https://api.twitter.com/1/account/verify_credentials.json'
+    STATUS_UPDATE_URL = 'https://api.twitter.com/1.1/statuses/update.json'
+    USER_INFO_URL     = 'https://api.twitter.com/1.1/account/verify_credentials.json'
     
     FORMAT = 'json'
     SERVER = 'http://api.twitpic.com'
